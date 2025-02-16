@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAllMusic } from "@/app/lib/musicApi";
+import styles from "./MusicList.module.css"; // Importação do CSS Module
 
 const MusicList: React.FC = () => {
   const [musicList, setMusicList] = useState<any[]>([]);
@@ -25,21 +26,21 @@ const MusicList: React.FC = () => {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Lista de Músicas</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Lista de Músicas</h2>
       {loading ? (
         <p>Carregando...</p>
       ) : musicList.length > 0 ? (
-        <div className="grid gap-4">
+        <div className={styles.grid}>
           {musicList.map((music) => (
-            <div key={music.id} className="border p-4 rounded shadow flex justify-between items-center">
-              <div>
-                <h3 className="font-bold text-lg">{music.title}</h3>
-                <p className="text-sm text-gray-600">{music.artist} - {music.album}</p>
+            <div key={music.id} className={styles.card}>
+              <div className={styles.info}>
+                <h3 className={styles.musicTitle}>{music.title}</h3>
+                <p className={styles.details}>{music.artist} - {music.album}</p>
               </div>
               <button
                 onClick={() => router.push(`/music-details/${music.id}`)}
-                className="bg-blue-500 text-white px-3 py-1 rounded"
+                className={styles.button}
               >
                 Visualizar Dados
               </button>

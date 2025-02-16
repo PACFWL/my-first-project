@@ -39,7 +39,7 @@ const MusicDetails: React.FC<{ id: string }> = ({ id }) => {
     setLoading(true);
     try {
       const data = await getMusicById(musicId);
-      console.log("Música carregada:", data); // 🛠️ Verificar se isExplicit está vindo
+      console.log("Música carregada:", data); 
       setMusic(data);
     } catch (error) {
       console.error("Erro ao buscar detalhes da música:", error);

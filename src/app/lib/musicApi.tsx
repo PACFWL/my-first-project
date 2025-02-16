@@ -54,7 +54,6 @@ export const searchMusic = async (params: Record<string, string | number | boole
   return fetchRequest(`${API_URL}/search?${query}`, { method: "GET" });
 };
 
-
 export const getPagedMusic = async (page: number = 0, size: number = 10) => {
   return fetchRequest(`${API_URL}/paged?page=${page}&size=${size}`, { method: "GET" });
 };

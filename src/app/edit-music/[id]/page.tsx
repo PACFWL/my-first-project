@@ -26,9 +26,10 @@ const EditMusicPage: React.FC = () => {
     lyrics: "",
     tags: "",
     metadata: {} as Record<string, string>,
+    albumCover: "",
   });
   const [albumCover, setAlbumCover] = useState<File | null>(null);
-
+  const [removeAlbumCover, setRemoveAlbumCover] = useState(false);
   useEffect(() => {
     if (musicId) {
       fetchMusicDetails(musicId);
@@ -39,6 +40,7 @@ const EditMusicPage: React.FC = () => {
     setLoading(true);
     try {
       const data = await getMusicById(musicId);
+      console.log("Dados recebidos na edição:", data);
       setMusic(data);
       setFormData({
         title: data.title,
@@ -56,6 +58,7 @@ const EditMusicPage: React.FC = () => {
         lyrics: data.lyrics || "",
         tags: data.tags ? data.tags.join(", ") : "",
         metadata: data.metadata || {},
+        albumCover: data.albumCoverImage || "",
       });
     } catch (error) {
       console.error("Erro ao buscar detalhes da música:", error);
@@ -77,6 +80,17 @@ const EditMusicPage: React.FC = () => {
     }
   };
 
+  const handleRemoveAlbumCover = () => {
+    setAlbumCover(null);
+    setFormData((prev) => ({ ...prev, albumCover: '' }));
+    setRemoveAlbumCover(true);
+  };
+
+  const handleKeepAlbumCover = () => {
+    setRemoveAlbumCover(false);
+  };
+
+
   const handleMetadataChange = (key: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
@@ -96,9 +110,10 @@ const EditMusicPage: React.FC = () => {
   const handleAddMetadata = () => {
     setFormData((prev) => ({
       ...prev,
-      metadata: { ...prev.metadata, "": "" }, // Adiciona uma nova entrada vazia
+      metadata: { ...prev.metadata, "": "" }, 
     }));
   };
+
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,8 +125,11 @@ const EditMusicPage: React.FC = () => {
       featuredArtists: formData.featuredArtists.split(",").map((a) => a.trim()),
       tags: formData.tags.split(",").map((t) => t.trim()),
       metadata: formData.metadata,
+      albumCover: removeAlbumCover ? undefined : albumCover || formData.albumCover,
     };
   
+    console.log("🎵 Dados enviados:", updatedMusic);
+  console.log("📷 Arquivo enviado:", albumCover);
     try {
       await updateMusic(musicId, updatedMusic, albumCover || undefined);
       alert("Música atualizada com sucesso!");
@@ -146,7 +164,6 @@ const EditMusicPage: React.FC = () => {
         <input name="audioQuality" value={formData.audioQuality} onChange={handleChange} placeholder="Qualidade de Áudio" className="border p-2 rounded" />
         <textarea name="lyrics" value={formData.lyrics} onChange={handleChange} placeholder="Letra da Música" className="border p-2 rounded h-32"></textarea>
         <input name="tags" value={formData.tags} onChange={handleChange} placeholder="Tags (separadas por vírgula)" className="border p-2 rounded" />
-        
   <strong>Metadados:</strong>
   {Object.entries(formData.metadata).map(([key, value], index) => (
     <div key={index} className="flex items-center gap-2 mb-2">
@@ -189,7 +206,33 @@ const EditMusicPage: React.FC = () => {
   >
     + Adicionar Metadado
   </button>
-        <label className="flex flex-col">
+       {formData.albumCover && !removeAlbumCover && (
+          <img
+            src={`data:image/jpeg;base64,${formData.albumCover}`}
+            alt="Capa do Álbum"
+            className="w-32 h-32 rounded-lg mx-auto mb-4"
+          />
+        )}
+
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={handleKeepAlbumCover}
+            className={`px-4 py-2 rounded ${removeAlbumCover ? 'bg-gray-300' : 'bg-blue-500 text-white'}`}
+          >
+            Manter Imagem
+          </button>
+
+          <button
+            type="button"
+            onClick={handleRemoveAlbumCover}
+            className="bg-red-500 text-white px-4 py-2 rounded"
+          >
+            Remover Imagem
+          </button>
+        </div>
+
+        <label className="flex flex-col mt-2">
           Capa do Álbum:
           <input type="file" onChange={handleFileChange} className="border p-2 rounded" />
         </label>

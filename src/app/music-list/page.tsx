@@ -1,4 +1,4 @@
-import MusicList from "@/app/components/MusicList"; // Corrigido
+import MusicList from "@/app/components/MusicList"; 
 
 export default function MusicListPage() {
   return (

@@ -44,12 +44,12 @@ export default function AddMusicPage() {
     setFormData((prev) => {
       const newMetadata = { ...prev.metadata };
   
-      // Remover a chave antiga se for alterada
+  
       if (oldKey !== newKey) {
         delete newMetadata[oldKey];
       }
   
-      // Adicionar a nova chave com o novo valor
+     
       newMetadata[newKey] = newValue;
   
       return { ...prev, metadata: newMetadata };
@@ -69,10 +69,10 @@ export default function AddMusicPage() {
   const handleAddMetadata = () => {
     setFormData((prev) => ({
       ...prev,
-      metadata: { ...prev.metadata, "": "" }, // Adiciona um novo campo vazio
+      metadata: { ...prev.metadata, "": "" }, 
     }));
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { getMusicById, deleteMusic } from "@/app/lib/musicApi";
 import { useRouter } from "next/navigation";
-import styles from "./MusicDetails.module.css";
+import styles from "../styles/musicDetails.module.css";
 
 interface Music {
   id: string;
@@ -128,7 +128,6 @@ const MusicDetails: React.FC<{ id: string }> = ({ id }) => {
       </button>
     </div>
   );
-  
 };
 
 export default MusicDetails;

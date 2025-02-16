@@ -1,4 +1,4 @@
-"use client"; // 🔥 Importante para evitar o erro de acesso síncrono aos params
+"use client";
 
 import MusicDetails from "@/app/components/MusicDetails";
 import { useParams } from "next/navigation";

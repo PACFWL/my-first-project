@@ -22,12 +22,12 @@ export const getAllMusic = async () => fetchRequest(API_URL, { method: "GET" });
 
 
 export const getMusicById = async (id: string) =>
-  fetchRequest(`${API_URL}/${id}`, { method: "GET" });
+  fetchRequest(`${API_URL}/api/music/${id}`, { method: "GET" });
 
 
 export const deleteMusic = async (id: string) => {
   console.log(`Enviando requisição DELETE para: ${API_URL}/${id}`);
-  return fetchRequest(`${API_URL}/${id}`, { method: "DELETE" });
+  return fetchRequest(`${API_URL}/api/music/${id}`, { method: "DELETE" });
 };
 
 
@@ -36,7 +36,7 @@ export const createMusic = async (music: any, albumCover?: File) => {
   formData.append("music", new Blob([JSON.stringify(music)], { type: "application/json" }));
   if (albumCover) formData.append("albumCoverImage", albumCover);
 
-  return fetchRequest(API_URL, { method: "POST", body: formData });
+  return fetchRequest(`${API_URL}/api/music`, { method: "POST", body: formData });
 };
 
 
@@ -45,15 +45,15 @@ export const updateMusic = async (id: string, music: any, albumCover?: File) => 
   formData.append("music", new Blob([JSON.stringify(music)], { type: "application/json" }));
   if (albumCover) formData.append("albumCoverImage", albumCover);
 
-  return fetchRequest(`${API_URL}/${id}`, { method: "PUT", body: formData });
+  return fetchRequest(`${API_URL}/api/music/${id}`, { method: "PUT", body: formData });
 };
 
 
 export const searchMusic = async (params: Record<string, string | number | boolean>) => {
   const query = new URLSearchParams(params as any).toString();
-  return fetchRequest(`${API_URL}/search?${query}`, { method: "GET" });
+  return fetchRequest(`${API_URL}/api/music/search?${query}`, { method: "GET" });
 };
 
 export const getPagedMusic = async (page: number = 0, size: number = 10) => {
-  return fetchRequest(`${API_URL}/paged?page=${page}&size=${size}`, { method: "GET" });
+  return fetchRequest(`${API_URL}/api/music/paged?page=${page}&size=${size}`, { method: "GET" });
 };

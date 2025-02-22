@@ -63,7 +63,6 @@
     color: white;
   }
   
-  /* Estilo da imagem na página */
 .albumCover {
     width: 256px;
     height: 256px;
@@ -75,10 +74,9 @@
   }
   
   .albumCover:hover {
-    transform: scale(1.05);
+    transform: scale(1.00);
   }
   
-  /* Estilos do Modal */
   .modalOverlay {
     position: fixed;
     top: 0;

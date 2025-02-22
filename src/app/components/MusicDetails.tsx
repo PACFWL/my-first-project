@@ -52,7 +52,6 @@ const MusicDetails: React.FC<{ id: string }> = ({ id }) => {
     setLoading(false);
   };
   
-
   const handleDelete = async () => {
     if (!music) return;
 

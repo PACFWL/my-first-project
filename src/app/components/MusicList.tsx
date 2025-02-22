@@ -39,7 +39,7 @@ const MusicList: React.FC = () => {
                 <p className={styles.details}>{music.artist} - {music.album}</p>
               </div>
               <button
-                onClick={() => router.push(`/music-details/${music.id}`)}
+                onClick={() => router.push(`/music/details/${music.id}`)}
                 className={styles.button}
               >
                 Visualizar Dados

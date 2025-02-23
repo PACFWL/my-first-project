@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/app/lib/authApi";
+import styles from "./RegisterPage.module.css"; 
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -23,16 +24,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Registrar</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleRegister} className="flex flex-col gap-4 w-80">
+    <div className={styles.container}>
+      <h1 className={styles.title}>Registrar</h1>
+      {error && <p className={styles.error}>{error}</p>}
+      <form onSubmit={handleRegister} className={styles.form}>
         <input
           type="text"
           placeholder="Nome"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border p-2 rounded"
+          className={styles.input}
           required
         />
         <input
@@ -40,7 +41,7 @@ export default function RegisterPage() {
           placeholder="E-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="border p-2 rounded"
+          className={styles.input}
           required
         />
         <input
@@ -48,18 +49,18 @@ export default function RegisterPage() {
           placeholder="Senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 rounded"
+          className={styles.input}
           required
         />
-            <input
-          type="role"
+        <input
+          type="text"
           placeholder="Role"
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          className="border p-2 rounded"
+          className={styles.input}
           required
         />
-        <button type="submit" className="bg-green-500 text-white p-2 rounded">
+        <button type="submit" className={styles.button}>
           Registrar
         </button>
       </form>

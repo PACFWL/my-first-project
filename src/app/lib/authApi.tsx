@@ -18,11 +18,13 @@ const fetchRequest = async (url: string, options: RequestInit) => {
 };
 
 export const loginUser = async (email: string, password: string) => {
-  return fetchRequest(`${API_URL}/api/users/login`, {
+  const response = await fetchRequest(`${API_URL}/api/users/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   });
+
+  return response.token; 
 };
 
 export const registerUser = async (user: { name: string; email: string; password: string; role: string }) => {

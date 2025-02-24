@@ -8,7 +8,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const fetchRequest = async (url: string, options: RequestInit) => {
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(url, {
+      ...options,
+      mode: "cors", 
+      credentials: "include" 
+    });
+
     if (!response.ok) throw new Error("Erro na requisição.");
     return response.json();
   } catch (error) {
@@ -16,6 +21,7 @@ const fetchRequest = async (url: string, options: RequestInit) => {
     throw error;
   }
 };
+
 
 export const loginUser = async (email: string, password: string) => {
   const response = await fetchRequest(`${API_URL}/api/users/login`, {

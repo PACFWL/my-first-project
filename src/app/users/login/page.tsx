@@ -24,7 +24,7 @@ export default function LoginPage() {
     } catch (err) {
       setError("Credenciais inválidas.");
     }
-  };
+  };  
 
   return (
     <div className={styles.container}>

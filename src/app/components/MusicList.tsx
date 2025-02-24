@@ -13,7 +13,7 @@ const MusicList: React.FC = () => {
   useEffect(() => {
     fetchMusic();
   }, []);
-
+  
   const fetchMusic = async () => {
     setLoading(true);
     try {
@@ -24,6 +24,7 @@ const MusicList: React.FC = () => {
     }
     setLoading(false);
   };
+  
 
   return (
     <div className={styles.container}>

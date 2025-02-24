@@ -6,20 +6,29 @@ if (!process.env.NEXT_PUBLIC_API_URL) {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const fetchRequest = async (url: string, options: RequestInit) => {
+const fetchRequest = async (url: string, options: RequestInit = {}) => {
   try {
-    const response = await fetch(url, options);
+    const token = localStorage.getItem("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers,
+    };
+
+    const response = await fetch(url, { ...options, headers });
+
     if (!response.ok) throw new Error(`Erro na requisição: ${response.status}`);
+
     return response.json();
   } catch (error) {
-    console.error("Erro ao acessar a API:", error);
+    console.error("Erro na API:", error);
     throw error;
   }
 };
 
 
-export const getAllMusic = async () => fetchRequest(API_URL, { method: "GET" });
-
+export const getAllMusic = async () => fetchRequest(`${API_URL}/api/music`, { method: "GET" });
 
 export const getMusicById = async (id: string) =>
   fetchRequest(`${API_URL}/api/music/${id}`, { method: "GET" });

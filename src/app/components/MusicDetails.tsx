@@ -59,7 +59,7 @@ const MusicDetails: React.FC<{ id: string }> = ({ id }) => {
       try {
         await deleteMusic(music.id);
         alert("Música excluída com sucesso!");
-        router.push("/music-list"); 
+        router.push("/music/list"); 
       } catch (error) {
         console.error("Erro ao excluir música:", error);
       }
@@ -93,7 +93,6 @@ const MusicDetails: React.FC<{ id: string }> = ({ id }) => {
     )}
   </>
 )}
-
       <h2 className={styles.title}>{music.title}</h2>
       <p className={styles.artist}>
         {music.artist} - {music.album} ({music.releaseYear})
@@ -122,7 +121,7 @@ const MusicDetails: React.FC<{ id: string }> = ({ id }) => {
         Excluir Música
       </button>
       
-      <button onClick={() => router.push(`/edit-music/${music.id}`)} className={`${styles.button} ${styles.editButton}`}>
+      <button onClick={() => router.push(`/music/edit/${music.id}`)} className={`${styles.button} ${styles.editButton}`}>
         Editar Música
       </button>
     </div>

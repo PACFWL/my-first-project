@@ -156,95 +156,97 @@ const EditMusicPage: React.FC = () => {
         <input name="releaseDate" value={formData.releaseDate} onChange={handleChange} type="date" placeholder="Data de Lançamento" className={styles.input} />
         <input name="genre" value={formData.genre} onChange={handleChange} placeholder="Gênero (separado por vírgula)" className={styles.input} />
         <input name="featuredArtists" value={formData.featuredArtists} onChange={handleChange} placeholder="Artistas em Destaque" className={styles.input} />
+        
         <label className={styles.checkboxContainer}>
           <input name="isExplicit" type="checkbox" checked={formData.isExplicit} onChange={handleChange} />
           Conteúdo Explícito
         </label>
+  
         <input name="duration" value={formData.duration} onChange={handleChange} type="number" placeholder="Duração (minutos)" className={styles.input} />
         <input name="rating" value={formData.rating} onChange={handleChange} type="number" placeholder="Avaliação (0-5)" className={styles.input} />
         <input name="price" value={formData.price} onChange={handleChange} placeholder="Preço" className={styles.input} />
         <input name="audioQuality" value={formData.audioQuality} onChange={handleChange} placeholder="Qualidade de Áudio" className={styles.input} />
         <textarea name="lyrics" value={formData.lyrics} onChange={handleChange} placeholder="Letra da Música" className={styles.textarea}></textarea>
         <input name="tags" value={formData.tags} onChange={handleChange} placeholder="Tags (separadas por vírgula)" className={styles.input} />
-  <strong>Metadados:</strong>
-  {Object.entries(formData.metadata).map(([key, value], index) => (
-    <div key={index} className={styles.metadataContainer}>
-      <input
-        type="text"
-        value={key}
-        onChange={(e) => {
-          const newKey = e.target.value;
-          const newMetadata = { ...formData.metadata };
-          newMetadata[newKey] = newMetadata[key];
-          delete newMetadata[key];
-          setFormData((prev) => ({
-            ...prev,
-            metadata: newMetadata,
-          }));
-        }}
-        placeholder="Chave"
-        className={styles.input}
-      />
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => handleMetadataChange(key, e.target.value)}
-        placeholder="Valor"
-        className={styles.input}
-      />
-      <button
-        type="button"
-        onClick={() => handleRemoveMetadata(key)}
-        className={styles.input}
-      >
-        ✕
-      </button>
-    </div>
-  ))}
-  <button
-    type="button"
-    onClick={handleAddMetadata}
-    className={styles.button}
-  >
-    + Adicionar Metadado
-  </button>
-       {formData.albumCover && !removeAlbumCover && (
+        
+        <strong>Metadados:</strong>
+        {Object.entries(formData.metadata).map(([key, value], index) => (
+          <div key={index} className={styles.metadataContainer}>
+            <input
+              type="text"
+              value={key}
+              onChange={(e) => {
+                const newKey = e.target.value;
+                const newMetadata = { ...formData.metadata };
+                newMetadata[newKey] = newMetadata[key];
+                delete newMetadata[key];
+                setFormData((prev) => ({
+                  ...prev,
+                  metadata: newMetadata,
+                }));
+              }}
+              placeholder="Chave"
+              className={styles.input}
+            />
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => handleMetadataChange(key, e.target.value)}
+              placeholder="Valor"
+              className={styles.input}
+            />
+            <button
+              type="button"
+              onClick={() => handleRemoveMetadata(key)}
+              className={styles.removeButton}
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+        
+        <button type="button" onClick={handleAddMetadata} className={styles.button}>
+          + Adicionar Metadado
+        </button>
+  
+        {formData.albumCover && !removeAlbumCover && (
           <img
             src={`data:image/jpeg;base64,${formData.albumCover}`}
             alt="Capa do Álbum"
-            className="w-32 h-32 rounded-lg mx-auto mb-4"
+            className={styles.albumCover}
           />
         )}
-
-        <div className="flex gap-2">
+  
+        <div className={styles.metadataContainer}>
           <button
             type="button"
             onClick={handleKeepAlbumCover}
-            className={`px-4 py-2 rounded ${removeAlbumCover ? 'bg-gray-300' : 'bg-blue-500 text-white'}`}
+            className={`${styles.button} ${removeAlbumCover ? styles.disabledButton : ''}`}
           >
             Manter Imagem
           </button>
-
+  
           <button
             type="button"
             onClick={handleRemoveAlbumCover}
-            className="bg-red-500 text-white px-4 py-2 rounded"
+            className={styles.removeButton}
           >
             Remover Imagem
           </button>
         </div>
-
-        <label className="flex flex-col mt-2">
+  
+        <label className={styles.form}>
           Capa do Álbum:
-          <input type="file" onChange={handleFileChange} className="border p-2 rounded" />
+          <input type="file" onChange={handleFileChange} className={styles.input} />
         </label>
-
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+  
+        <button type="submit" className={styles.button}>
           Salvar Alterações
         </button>
       </form>
     </div>
   );
+  
 };
 
 export default EditMusicPage;

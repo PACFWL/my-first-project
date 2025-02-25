@@ -20,11 +20,14 @@ export default function Dashboard() {
       <p>Bem-vindo ao seu painel!</p>
         <h1 className={styles.title}>Gerenciamento de Músicas</h1>
       <div className={styles.buttonContainer}>
-        <button onClick={() => router.push("/music/list")} className={styles.buttonBlue}>
+        <button onClick={() => router.push("/music/list")} className={styles.button}>
           Listagem de Músicas
         </button>
-        <button onClick={() => router.push("/music/add")} className={styles.buttonGreen}>
+        <button onClick={() => router.push("/music/add")} className={styles.button}>
           Adicionar Nova Música
+        </button>
+        <button onClick={() => router.push("/music/paged")} className={styles.button}>
+          Listagem de paginação
         </button>
       </div> 
     </div>

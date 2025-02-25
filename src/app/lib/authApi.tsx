@@ -22,7 +22,6 @@ const fetchRequest = async (url: string, options: RequestInit) => {
   }
 };
 
-
 export const loginUser = async (email: string, password: string) => {
   const response = await fetchRequest(`${API_URL}/api/users/login`, {
     method: "POST",

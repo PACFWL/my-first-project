@@ -24,6 +24,7 @@ export default function AddMusicPage() {
     tags: "",
     metadata: {} as Record<string, string>,
   });
+
   const [albumCover, setAlbumCover] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -44,12 +45,10 @@ export default function AddMusicPage() {
   const handleMetadataChange = (oldKey: string, newKey: string, newValue: string) => {
     setFormData((prev) => {
       const newMetadata = { ...prev.metadata };
-  
-  
+    
       if (oldKey !== newKey) {
         delete newMetadata[oldKey];
       }
-  
      
       newMetadata[newKey] = newValue;
   
@@ -57,7 +56,6 @@ export default function AddMusicPage() {
     });
   };
   
-
   const handleRemoveMetadata = (key: string) => {
     const newMetadata = { ...formData.metadata };
     delete newMetadata[key];

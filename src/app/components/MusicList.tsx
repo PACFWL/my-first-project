@@ -25,7 +25,6 @@ const MusicList: React.FC = () => {
     setLoading(false);
   };
   
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Lista de Músicas</h2>

@@ -29,6 +29,7 @@ const EditMusicPage: React.FC = () => {
     metadata: {} as Record<string, string>,
     albumCover: "",
   });
+
   const [albumCover, setAlbumCover] = useState<File | null>(null);
   const [removeAlbumCover, setRemoveAlbumCover] = useState(false);
   useEffect(() => {
@@ -115,7 +116,6 @@ const EditMusicPage: React.FC = () => {
     }));
   };
 
-  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
@@ -130,7 +130,8 @@ const EditMusicPage: React.FC = () => {
     };
   
     console.log("🎵 Dados enviados:", updatedMusic);
-  console.log("📷 Arquivo enviado:", albumCover);
+    console.log("📷 Arquivo enviado:", albumCover);
+    
     try {
       await updateMusic(musicId, updatedMusic, albumCover || undefined);
       alert("Música atualizada com sucesso!");

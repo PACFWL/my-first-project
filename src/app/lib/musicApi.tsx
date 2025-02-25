@@ -10,11 +10,11 @@ const fetchRequest = async (url: string, options: RequestInit = {}) => {
   try {
     const token = localStorage.getItem("token");
 
-    const headers = {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
-    };
+    const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};
+
+    if (!(options.body instanceof FormData)) {
+      headers["Content-Type"] = "application/json";
+    }
 
     const response = await fetch(url, { ...options, headers });
 
@@ -27,18 +27,15 @@ const fetchRequest = async (url: string, options: RequestInit = {}) => {
   }
 };
 
-
 export const getAllMusic = async () => fetchRequest(`${API_URL}/api/music`, { method: "GET" });
 
 export const getMusicById = async (id: string) =>
   fetchRequest(`${API_URL}/api/music/${id}`, { method: "GET" });
 
-
 export const deleteMusic = async (id: string) => {
   console.log(`Enviando requisição DELETE para: ${API_URL}/${id}`);
   return fetchRequest(`${API_URL}/api/music/${id}`, { method: "DELETE" });
 };
-
 
 export const createMusic = async (music: any, albumCover?: File) => {
   const formData = new FormData();
@@ -48,7 +45,6 @@ export const createMusic = async (music: any, albumCover?: File) => {
   return fetchRequest(`${API_URL}/api/music`, { method: "POST", body: formData });
 };
 
-
 export const updateMusic = async (id: string, music: any, albumCover?: File) => {
   const formData = new FormData();
   formData.append("music", new Blob([JSON.stringify(music)], { type: "application/json" }));
@@ -56,7 +52,6 @@ export const updateMusic = async (id: string, music: any, albumCover?: File) => 
 
   return fetchRequest(`${API_URL}/api/music/${id}`, { method: "PUT", body: formData });
 };
-
 
 export const searchMusic = async (params: Record<string, string | number | boolean>) => {
   const query = new URLSearchParams(params as any).toString();

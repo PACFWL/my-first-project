@@ -26,7 +26,7 @@ export default function AddMusicPage() {
   });
 
   const [albumCover, setAlbumCover] = useState<File | null>(null);
-  
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -39,7 +39,9 @@ export default function AddMusicPage() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setAlbumCover(e.target.files[0]);
+      const file = e.target.files[0];
+      setAlbumCover(file);
+      setPreviewImage(URL.createObjectURL(file));
     }
   };
 
@@ -151,7 +153,7 @@ export default function AddMusicPage() {
         </button>
   
         <input type="file" onChange={handleFileChange} className={styles.fileInput} />
-  
+        {previewImage && <img src={previewImage} alt="Preview da Capa" className={styles.previewImage} />}
         <button type="submit" disabled={loading} className={styles.button}>
           {loading ? "Salvando..." : "Adicionar Música"}
         </button>

@@ -1,10 +1,17 @@
 .container {
+  padding: 24px;
   max-width: 50rem;
   margin: 2rem auto;
-  padding: 2rem;
-  background-color: #f9fafb;
+  background: linear-gradient(135deg, #1e293b, #111827);
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.2);
+  color: white;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.container:hover {
+  transform: scale(1.01);
 }
 
 .title {
@@ -18,7 +25,8 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .input, .select, .textarea, .fileInput {
@@ -31,53 +39,58 @@
 }
 
 .textarea {
-  height: 120px;
-  resize: vertical;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
 }
 
 .checkboxContainer {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   font-size: 1rem;
+  color: #d1d5db;
 }
 
 .metadataContainer {
   display: flex;
+  gap: 8px;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
 }
 
 .button {
-  background-color: #3b82f6;
-  color: white;
-  padding: 0.75rem;
+  background: linear-gradient(135deg, #f7bf09, #e4a809);
+  color: #1e293b;
+  padding: 10px 16px;
   border-radius: 8px;
-  text-align: center;
+  font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.2s ease-in-out;
   border: none;
-  font-size: 1rem;
-  font-weight: 500;
+  margin-top: 10px;
 }
 
 .button:hover {
-  background-color: #2563eb;
+  background: linear-gradient(135deg, #e4a809, #c99700);
+  transform: scale(1.05);
 }
 
 .removeButton {
-  background-color: #dc2626;
+  background: linear-gradient(135deg, #ff4b4b, #c53030);
   color: white;
-  padding: 0.5rem 0.75rem;
+  padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
   border: none;
-  font-size: 1rem;
 }
 
 .removeButton:hover {
-  background-color: #b91c1c;
+  background: linear-gradient(135deg, #c53030, #a02020);
+  transform: scale(1.05);
 }
 
 .fileInput {

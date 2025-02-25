@@ -36,6 +36,11 @@ const MusicList: React.FC = () => {
             <div key={music.id} className={styles.card}>
               <div className={styles.info}>
                 <h3 className={styles.musicTitle}>{music.title}</h3>
+                <img
+                  src={`data:image/jpeg;base64,${music.albumCoverImage}`}
+                  alt={music.title}
+                  className={styles.albumCover}
+                />
                 <p className={styles.details}>{music.artist} - {music.album}</p>
               </div>
               <button

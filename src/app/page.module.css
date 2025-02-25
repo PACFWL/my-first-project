@@ -1,48 +1,62 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #f8f9fa;
-  }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .buttonContainer {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .buttonBlue, .buttonGreen {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .buttonBlue {
-    background-color: #007bff;
-  }
-  
-  .buttonBlue:hover {
-    background-color: #0056b3;
-  }
-  
-  .buttonGreen {
-    background-color: #28a745;
-  }
-  
-  .buttonGreen:hover {
-    background-color: #1e7e34;
-  }
-  
+  padding: 24px;
+  max-width: 900px;
+  margin: 20px auto;
+  background: linear-gradient(135deg, #1e293b, #111827);
+  border-radius: 12px;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.2);
+  color: white;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.container:hover {
+  transform: scale(1.01);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #f7bf09;
+  text-shadow: 2px 2px 8px rgba(247, 191, 9, 0.4);
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttonBlue, .buttonGreen {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.buttonBlue {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+}
+
+.buttonBlue:hover {
+  background: linear-gradient(135deg, #0056b3, #003f7f);
+  transform: scale(1.05);
+}
+
+.buttonGreen {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: white;
+}
+
+.buttonGreen:hover {
+  background: linear-gradient(135deg, #1e7e34, #155d25);
+  transform: scale(1.05);
+}

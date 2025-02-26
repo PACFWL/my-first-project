@@ -1,28 +1,13 @@
-// src/app/music/edit/[id]/page.tsx
 "use client";
-
-import EditMusicForm from "@/app/components/MusicFormEdit";
-
-export default function EditMusicPage() {
-  return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Editar Música</h1>
-      <EditMusicForm />
-    </div>
-  );
-}
-
-
-/*"use client";
 
 import React, { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { getMusicById, updateMusic } from "@/app/lib/musicApi";
-import styles from "./EditMusicPage.module.css"
+import styles from "../styles/MusicFormEdit.module.css";
 
-const EditMusicPage: React.FC = () => {
+const MusicFormEdit: React.FC = () => {
   const { id } = useParams();
-  const musicId = Array.isArray(id) ? id[0] : id ?? ""; 
+  const musicId = Array.isArray(id) ? id[0] : id ?? "";
   const router = useRouter();
   const [music, setMusic] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -57,7 +42,6 @@ const EditMusicPage: React.FC = () => {
     setLoading(true);
     try {
       const data = await getMusicById(musicId);
-      console.log("Dados recebidos na edição:", data);
       setMusic(data);
       setFormData({
         title: data.title,
@@ -83,6 +67,7 @@ const EditMusicPage: React.FC = () => {
     setLoading(false);
   };
 
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     setFormData((prev) => ({
@@ -90,6 +75,7 @@ const EditMusicPage: React.FC = () => {
       [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -133,7 +119,6 @@ const EditMusicPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
     const updatedMusic = {
       ...formData,
       releaseYear: parseInt(formData.releaseYear),
@@ -143,19 +128,17 @@ const EditMusicPage: React.FC = () => {
       metadata: formData.metadata,
       albumCover: removeAlbumCover ? undefined : albumCover || formData.albumCover,
     };
-  
     console.log("🎵 Dados enviados:", updatedMusic);
     console.log("📷 Arquivo enviado:", albumCover);
-    
     try {
-      await updateMusic(musicId, updatedMusic, albumCover || undefined);
-      alert("Música atualizada com sucesso!");
-      router.push(`/music/details/${musicId}`);
-    } catch (error) {
-      console.error("Erro ao atualizar música:", error);
-      alert("Erro ao atualizar música. Verifique os dados e tente novamente.");
-    }
-  };
+          await updateMusic(musicId, updatedMusic, albumCover || undefined);
+          alert("Música atualizada com sucesso!");
+          router.push(`/music/details/${musicId}`);
+        } catch (error) {
+          console.error("Erro ao atualizar música:", error);
+          alert("Erro ao atualizar música. Verifique os dados e tente novamente.");
+        }
+      };
 
   if (loading) return <p>Carregando...</p>;
   if (!music) return <p className="text-red-500">Música não encontrada!</p>;
@@ -264,5 +247,4 @@ const EditMusicPage: React.FC = () => {
   
 };
 
-export default EditMusicPage;
-*/
+export default MusicFormEdit;

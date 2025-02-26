@@ -35,6 +35,7 @@ const useMusicDetails = (id: string) => {
     setLoading(true);
     try {
       const data = await getMusicById(musicId);
+      console.log("Música carregada:", data); 
       setMusic(data);
     } catch (error) {
       console.error("Erro ao buscar detalhes da música:", error);

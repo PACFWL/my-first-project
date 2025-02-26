@@ -9,8 +9,14 @@ const MusicFormEdit: React.FC = () => {
   const { id } = useParams();
   const musicId = Array.isArray(id) ? id[0] : id ?? "";
   const router = useRouter();
+
   const [music, setMusic] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [albumCoverFile, setAlbumCoverFile] = useState<File | null>(null);
+  const [removeAlbumCover, setRemoveAlbumCover] = useState(false);
+  const [existingAlbumCover, setExistingAlbumCover] = useState<string | null>(null);
+  const [initialAlbumCover, setInitialAlbumCover] = useState<string | null>(null);
+
   const [formData, setFormData] = useState({
     title: "",
     artist: "",
@@ -27,11 +33,8 @@ const MusicFormEdit: React.FC = () => {
     lyrics: "",
     tags: "",
     metadata: {} as Record<string, string>,
-    albumCover: "",
   });
 
-  const [albumCover, setAlbumCover] = useState<File | null>(null);
-  const [removeAlbumCover, setRemoveAlbumCover] = useState(false);
   useEffect(() => {
     if (musicId) {
       fetchMusicDetails(musicId);
@@ -43,6 +46,7 @@ const MusicFormEdit: React.FC = () => {
     try {
       const data = await getMusicById(musicId);
       setMusic(data);
+
       setFormData({
         title: data.title,
         artist: data.artist,
@@ -51,7 +55,7 @@ const MusicFormEdit: React.FC = () => {
         releaseDate: data.releaseDate || "",
         genre: data.genre ? data.genre.join(", ") : "",
         featuredArtists: data.featuredArtists ? data.featuredArtists.join(", ") : "",
-        isExplicit: data.explicit || false, 
+        isExplicit: data.explicit || false,
         duration: data.duration ? data.duration.toString() : "",
         rating: data.rating ? data.rating.toString() : "",
         price: data.price || "",
@@ -59,14 +63,18 @@ const MusicFormEdit: React.FC = () => {
         lyrics: data.lyrics || "",
         tags: data.tags ? data.tags.join(", ") : "",
         metadata: data.metadata || {},
-        albumCover: data.albumCoverImage || "",
       });
+
+      if (data.albumCoverImage) {
+        const imageSrc = `data:image/jpeg;base64,${data.albumCoverImage}`;
+        setExistingAlbumCover(imageSrc);
+        setInitialAlbumCover(imageSrc);
+      }
     } catch (error) {
       console.error("Erro ao buscar detalhes da música:", error);
     }
     setLoading(false);
   };
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -76,23 +84,19 @@ const MusicFormEdit: React.FC = () => {
     }));
   };
 
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setAlbumCover(e.target.files[0]);
+      setAlbumCoverFile(e.target.files[0]);
+      setExistingAlbumCover(null);
+      setRemoveAlbumCover(false);
     }
   };
 
   const handleRemoveAlbumCover = () => {
-    setAlbumCover(null);
-    setFormData((prev) => ({ ...prev, albumCover: '' }));
+    setAlbumCoverFile(null);
+    setExistingAlbumCover(null);
     setRemoveAlbumCover(true);
   };
-
-  const handleKeepAlbumCover = () => {
-    setRemoveAlbumCover(false);
-  };
-
 
   const handleMetadataChange = (key: string, value: string) => {
     setFormData((prev) => ({
@@ -119,6 +123,14 @@ const MusicFormEdit: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    let finalAlbumCover = null;
+    if (albumCoverFile) {
+      finalAlbumCover = albumCoverFile;
+    } else if (!removeAlbumCover && initialAlbumCover) {
+      finalAlbumCover = initialAlbumCover;
+    }
+
     const updatedMusic = {
       ...formData,
       releaseYear: parseInt(formData.releaseYear),
@@ -126,19 +138,21 @@ const MusicFormEdit: React.FC = () => {
       featuredArtists: formData.featuredArtists.split(",").map((a) => a.trim()),
       tags: formData.tags.split(",").map((t) => t.trim()),
       metadata: formData.metadata,
-      albumCover: removeAlbumCover ? undefined : albumCover || formData.albumCover,
+      albumCover: finalAlbumCover,
     };
+
     console.log("🎵 Dados enviados:", updatedMusic);
-    console.log("📷 Arquivo enviado:", albumCover);
+    console.log("📷 Arquivo enviado:", albumCoverFile);
+
     try {
-          await updateMusic(musicId, updatedMusic, albumCover || undefined);
-          alert("Música atualizada com sucesso!");
-          router.push(`/music/details/${musicId}`);
-        } catch (error) {
-          console.error("Erro ao atualizar música:", error);
-          alert("Erro ao atualizar música. Verifique os dados e tente novamente.");
-        }
-      };
+      await updateMusic(musicId, updatedMusic, albumCoverFile || undefined);
+      alert("Música atualizada com sucesso!");
+      router.push(`/music/details/${musicId}`);
+    } catch (error) {
+      console.error("Erro ao atualizar música:", error);
+      alert("Erro ao atualizar música. Verifique os dados e tente novamente.");
+    }
+  };
 
   if (loading) return <p>Carregando...</p>;
   if (!music) return <p className="text-red-500">Música não encontrada!</p>;
@@ -153,20 +167,17 @@ const MusicFormEdit: React.FC = () => {
         <input name="releaseYear" value={formData.releaseYear} onChange={handleChange} type="number" placeholder="Ano de Lançamento" className={styles.input} required />
         <input name="releaseDate" value={formData.releaseDate} onChange={handleChange} type="date" placeholder="Data de Lançamento" className={styles.input} />
         <input name="genre" value={formData.genre} onChange={handleChange} placeholder="Gênero (separado por vírgula)" className={styles.input} />
-        <input name="featuredArtists" value={formData.featuredArtists} onChange={handleChange} placeholder="Artistas em Destaque" className={styles.input} />
-        
+        <input name="featuredArtists" value={formData.featuredArtists} onChange={handleChange} placeholder="Artistas em Destaque" className={styles.input} /> 
         <label className={styles.checkboxContainer}>
           <input name="isExplicit" type="checkbox" checked={formData.isExplicit} onChange={handleChange} />
           Conteúdo Explícito
-        </label>
-  
+        </label>  
         <input name="duration" value={formData.duration} onChange={handleChange} type="number" placeholder="Duração (minutos)" className={styles.input} />
         <input name="rating" value={formData.rating} onChange={handleChange} type="number" placeholder="Avaliação (0-5)" className={styles.input} />
         <input name="price" value={formData.price} onChange={handleChange} placeholder="Preço" className={styles.input} />
         <input name="audioQuality" value={formData.audioQuality} onChange={handleChange} placeholder="Qualidade de Áudio" className={styles.input} />
         <textarea name="lyrics" value={formData.lyrics} onChange={handleChange} placeholder="Letra da Música" className={styles.textarea}></textarea>
         <input name="tags" value={formData.tags} onChange={handleChange} placeholder="Tags (separadas por vírgula)" className={styles.input} />
-        
         <strong>Metadados:</strong>
         {Object.entries(formData.metadata).map(([key, value], index) => (
           <div key={index} className={styles.metadataContainer}>
@@ -206,45 +217,25 @@ const MusicFormEdit: React.FC = () => {
         <button type="button" onClick={handleAddMetadata} className={styles.button}>
           + Adicionar Metadado
         </button>
-  
-        {formData.albumCover && !removeAlbumCover && (
-          <img
-            src={`data:image/jpeg;base64,${formData.albumCover}`}
-            alt="Capa do Álbum"
-            className={styles.albumCover}
-          />
+        Exibição da capa do álbum -----
+        {existingAlbumCover && !removeAlbumCover ? (
+          <div className={styles.albumContainer}>
+            <img src={existingAlbumCover} alt="Capa do Álbum" className={styles.albumCover} />
+            <button type="button" onClick={handleRemoveAlbumCover} className={styles.removeButton}>
+              Remover Imagem
+            </button>
+          </div>
+        ) : (
+          <label className={styles.fileInputLabel}>
+            Escolher uma imagem:
+            <input type="file" onChange={handleFileChange} className={styles.input} />
+          </label>
         )}
-  
-        <div className={styles.metadataContainer}>
-          <button
-            type="button"
-            onClick={handleKeepAlbumCover}
-            className={`${styles.button} ${removeAlbumCover ? styles.disabledButton : ''}`}
-          >
-            Manter Imagem
-          </button>
-  
-          <button
-            type="button"
-            onClick={handleRemoveAlbumCover}
-            className={styles.removeButton}
-          >
-            Remover Imagem
-          </button>
-        </div>
-  
-        <label className={styles.form}>
-          Capa do Álbum:
-          <input type="file" onChange={handleFileChange} className={styles.input} />
-        </label>
-  
-        <button type="submit" className={styles.button}>
-          Salvar Alterações
-        </button>
+
+        <button type="submit" className={styles.button}>Salvar Alterações</button>
       </form>
     </div>
   );
-  
 };
 
 export default MusicFormEdit;

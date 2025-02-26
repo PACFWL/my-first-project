@@ -1,7 +1,9 @@
+
 "use client";
 
 import MusicDetails from "@/app/components/MusicDetails";
 import { useParams } from "next/navigation";
+import styles from "../../../styles/MusicDetailsPage.module.css";
 
 export default function MusicDetailsPage() {
   const params = useParams();
@@ -12,8 +14,8 @@ export default function MusicDetailsPage() {
   }
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Detalhes da Música</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Detalhes da Música</h1>
       <MusicDetails id={id} />
     </div>
   );

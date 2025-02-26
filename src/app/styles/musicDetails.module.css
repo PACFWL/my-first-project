@@ -97,7 +97,6 @@
   transform: scale(1.05);
 }
 
-/* Efeito de modal para exibir imagem ampliada */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -123,3 +122,4 @@
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
 }
+

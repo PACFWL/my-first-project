@@ -1,7 +1,7 @@
-// src/app/music/edit/[id]/page.tsx
+
 "use client";
 
-import EditMusicForm from "@/app/components/MusicFormEdit";
+import EditMusicForm from "@/app/components/edit/MusicFormEdit";
 
 export default function EditMusicPage() {
   return (

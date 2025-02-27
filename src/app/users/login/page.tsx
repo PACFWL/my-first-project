@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/app/lib/authApi";
-import styles from "./LoginPage.module.css"; 
+import styles from "../../styles/user/LoginPage.module.css"; 
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");

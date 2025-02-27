@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/app/lib/authApi";
-import styles from "./RegisterPage.module.css"; 
+import styles from "../../styles/user/RegisterPage.module.css"; 
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");

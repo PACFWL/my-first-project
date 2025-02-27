@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getPagedMusic } from "@/app/lib/musicApi";
-import styles from "../../styles/MusicList.module.css";
+import styles from "../../styles/music/MusicList.module.css";
 
 const PagedMusicList = () => {
   const [musicList, setMusicList] = useState<any[]>([]);

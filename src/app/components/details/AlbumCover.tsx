@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../styles/MusicDetails.module.css";
+import styles from "../../styles/music/MusicDetails.module.css";
 
 const AlbumCover: React.FC<{ albumCoverImage: string; title: string }> = ({
   albumCoverImage,

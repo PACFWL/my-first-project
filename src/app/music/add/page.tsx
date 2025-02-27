@@ -1,4 +1,4 @@
-import MusicForm from "@/app/components/MusicForm";
+import MusicForm from "@/app/components/add/MusicForm";
 
 export default function AddMusicPage() {
   return (

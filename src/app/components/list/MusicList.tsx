@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAllMusic } from "@/app/lib/musicApi";
-import styles from "../styles/MusicList.module.css";
+import styles from "../../styles/music/MusicList.module.css";
 
 const MusicList: React.FC = () => {
   const [musicList, setMusicList] = useState<any[]>([]);

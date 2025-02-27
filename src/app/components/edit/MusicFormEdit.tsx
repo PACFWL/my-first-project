@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { getMusicById, updateMusic } from "@/app/lib/musicApi";
-import styles from "../styles/MusicFormEdit.module.css";
+import styles from "../../styles/music/MusicFormEdit.module.css";
 
 const MusicFormEdit: React.FC = () => {
   const { id } = useParams();
@@ -217,7 +217,6 @@ const MusicFormEdit: React.FC = () => {
         <button type="button" onClick={handleAddMetadata} className={styles.button}>
           + Adicionar Metadado
         </button>
-        Exibição da capa do álbum -----
         {existingAlbumCover && !removeAlbumCover ? (
           <div className={styles.albumContainer}>
             <img src={existingAlbumCover} alt="Capa do Álbum" className={styles.albumCover} />

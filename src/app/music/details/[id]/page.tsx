@@ -1,9 +1,9 @@
 
 "use client";
 
-import MusicDetails from "@/app/components/MusicDetails";
+import MusicDetails from "@/app/components/details/MusicDetails";
 import { useParams } from "next/navigation";
-import styles from "../../../styles/MusicDetailsPage.module.css";
+import styles from "../../../styles/music/MusicDetailsPage.module.css";
 
 export default function MusicDetailsPage() {
   const params = useParams();

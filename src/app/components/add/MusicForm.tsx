@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createMusic } from "@/app/lib/musicApi";
-import styles from "../styles/MusicForm.module.css";
+import styles from "../../styles/music/MusicForm.module.css";
 
 const MusicForm: React.FC = () => {
   const router = useRouter();

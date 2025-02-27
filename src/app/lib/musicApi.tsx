@@ -61,3 +61,21 @@ export const searchMusic = async (params: Record<string, string | number | boole
 export const getPagedMusic = async (page: number = 0, size: number = 10) => {
   return fetchRequest(`${API_URL}/api/music/paged?page=${page}&size=${size}`, { method: "GET" });
 };
+
+export const getMusicByGenres = async (genres: string[]) => 
+  fetchRequest(`${API_URL}/api/music/filter/by-genres?genres=${genres.join(",")}`, { method: "GET" });
+
+export const getMusicByArtist = async (artist: string) => 
+  fetchRequest(`${API_URL}/api/music/filter/by-artist?artist=${artist}`, { method: "GET" });
+
+export const getMusicByRating = async (rating: number) => 
+  fetchRequest(`${API_URL}/api/music/filter/by-rating?rating=${rating}`, { method: "GET" });
+
+export const getMusicByPrice = async (maxPrice: number) => 
+  fetchRequest(`${API_URL}/api/music/filter/by-price?maxPrice=${maxPrice}`, { method: "GET" });
+
+export const getMusicByAudioQuality = async (audioQuality: string) => 
+  fetchRequest(`${API_URL}/api/music/filter/by-audio-quality?audioQuality=${audioQuality}`, { method: "GET" });
+
+export const getMusicByCreationDate = async (createdAfter: string) => 
+  fetchRequest(`${API_URL}/api/music/filter/by-created-after?createdAfter=${createdAfter}`, { method: "GET" });

@@ -1,7 +1,7 @@
 "use client"; 
 
 import React, { createContext, useState, useContext } from "react";
-import { getAllMusic } from "@/app/lib/musicApi";
+import { getAllMusic } from "@/app/lib/music/musicApi";
 
 interface Music {
   id: string;

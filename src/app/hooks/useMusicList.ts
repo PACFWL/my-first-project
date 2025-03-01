@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllMusic } from "@/app/lib/musicApi";
+import { getAllMusic } from "@/app/lib/music/musicApi";
 
 const useMusicList = () => {
 

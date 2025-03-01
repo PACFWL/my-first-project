@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMusicById } from "@/app/lib/musicApi";
+import { getMusicById } from "@/app/lib/music/musicApi";
 
 interface Music {
   id: string;

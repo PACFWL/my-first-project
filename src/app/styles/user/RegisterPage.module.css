@@ -1,64 +1,77 @@
 .container {
-  padding: 24px;
-  max-width: 400px;
-  margin: 50px auto;
-  background: linear-gradient(135deg, #1e293b, #111827);
-  border-radius: 12px;
-  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.2);
-  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   text-align: center;
-  transition: transform 0.2s ease-in-out;
-}
-
-.container:hover {
-  transform: scale(1.01);
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 24px;
   font-weight: bold;
-  margin-bottom: 16px;
-  color: #f7bf09;
-  text-shadow: 2px 2px 8px rgba(247, 191, 9, 0.4);
+  margin-bottom: 10px;
 }
 
 .error {
-  color: #ff4d4d;
-  font-weight: bold;
-  margin-bottom: 12px;
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .input {
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 1rem;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
 }
 
-.input::placeholder {
-  color: #d1d5db;
+.input:focus {
+  border-color: #0070f3;
+  outline: none;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.button,
+.buttonOutline {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .button {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background-color: #0070f3;
   color: white;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
   border: none;
 }
 
 .button:hover {
-  background: linear-gradient(135deg, #16a34a, #0f9d58);
-  transform: scale(1.05);
+  background-color: #005bb5;
+}
+
+.buttonOutline {
+  background: transparent;
+  border: 2px solid #0070f3;
+  color: #0070f3;
+}
+
+.buttonOutline:hover {
+  background-color: #0070f3;
+  color: white;
 }

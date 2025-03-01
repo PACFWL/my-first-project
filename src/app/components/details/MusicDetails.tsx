@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import useMusicDetails from "@/app/hooks/useMusicDetails";
 import AlbumCover from "./AlbumCover";
 import MusicInfo from "./MusicInfo";
-import { deleteMusic } from "@/app/lib/musicApi";
+import { deleteMusic } from "@/app/lib/music/musicApi";
 import styles from "../../styles/music/MusicDetails.module.css";
 
 const MusicDetails: React.FC<{ id: string }> = ({ id }) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { getMusicById, updateMusic } from "@/app/lib/musicApi";
+import { getMusicById, updateMusic } from "@/app/lib/music/musicApi";
 
 const useMusicFormEdit = () => {
   const { id } = useParams();

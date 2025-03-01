@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createMusic } from "@/app/lib/musicApi";
+import { createMusic } from "@/app/lib/music/musicApi";
 
 const useMusicFormAdd = () => {
     const router = useRouter();

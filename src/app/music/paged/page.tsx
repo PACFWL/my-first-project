@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getPagedMusic } from "@/app/lib/musicApi";
+import { getPagedMusic } from "@/app/lib/music/musicApi";
 import styles from "../../styles/music/MusicList.module.css";
 
 const PagedMusicList = () => {

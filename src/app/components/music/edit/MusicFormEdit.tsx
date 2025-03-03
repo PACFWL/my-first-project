@@ -59,7 +59,19 @@ import styles from "../../../styles/music/MusicFormEdit.module.css";
   </select>
 </label>
 
-        <textarea name="lyrics" value={formData.lyrics} onChange={handleChange} placeholder="Letra da Música" className={styles.textarea}></textarea>
+<textarea
+  name="lyrics"
+  value={formData.lyrics}
+  onChange={handleChange}
+  placeholder="Letra da Música"
+  className={styles.textarea}
+  rows={3}
+  onInput={(e) => {
+    e.currentTarget.style.height = "auto"; 
+    e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+  }}
+></textarea>
+
         <input name="tags" value={formData.tags} onChange={handleChange} placeholder="Tags (separadas por vírgula)" className={styles.input} />
         <strong>Metadados:</strong>
         {Object.entries(formData.metadata).map(([key, value], index) => (
@@ -122,5 +134,3 @@ import styles from "../../../styles/music/MusicFormEdit.module.css";
 };
 
 export default MusicFormEdit;
-
-//<input name="audioQuality" value={formData.audioQuality} onChange={handleChange} placeholder="Qualidade de Áudio" className={styles.input} />

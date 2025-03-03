@@ -1,18 +1,8 @@
 import React from "react";
 import styles from "../../../styles/music/MusicDetails.module.css";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import StarRating from "@/app/components/music/details/StarRating";
 
 const MusicInfo: React.FC<{ music: any }> = ({ music }) => {
-  const renderStars = (rating: number) => {
-    const fullStars = Math.floor(rating);
-    const emptyStars = 5 - fullStars;
-    return (
-      <span>
-        {Array(fullStars).fill(null).map((_, i) => <FaStar key={i} className={styles.star} />)}
-        {Array(emptyStars).fill(null).map((_, i) => <FaRegStar key={i + fullStars} className={styles.star} />)}
-      </span>
-    );
-  };
 
   return (
     <div className={styles.details}>
@@ -26,8 +16,10 @@ const MusicInfo: React.FC<{ music: any }> = ({ music }) => {
       )}
       {music.duration && <p><strong>Duração:</strong> {music.duration} minutos</p>}
       {music.rating && (
-        <p><strong>Avaliação:</strong> {music.rating}/5 <span className={styles.starContainer}>{renderStars(music.rating)}</span></p>
-      )}
+  <p>
+    <strong>Avaliação:</strong> {music.rating}/5 <StarRating rating={music.rating} />
+  </p>
+)}
       {music.price && <p><strong>Preço:</strong> R$ {music.price}</p>}
       {music.audioQuality && <p><strong>Qualidade de Áudio:</strong> {music.audioQuality}</p>}
       {music.tags && <p><strong>Tags:</strong> {music.tags.join(", ")}</p>}

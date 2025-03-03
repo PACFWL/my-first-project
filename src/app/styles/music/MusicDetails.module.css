@@ -123,3 +123,24 @@
   box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
 }
 
+/*.starContainer {
+  display: flex;
+  gap: 2px;
+}
+
+.partialStar {
+  position: relative;
+  display: inline-block;
+}
+
+.partialStar svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.partialStar .filled {
+  color: gold;
+  clip-path: inset(0 calc((1 - var(--fill)) * 100%) 0 0);
+}
+*/

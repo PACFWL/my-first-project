@@ -34,8 +34,8 @@ const MusicDetails: React.FC<{ id: string }> = ({ id }) => {
     <div className={styles.container}>
       {music.albumCoverImage && <AlbumCover albumCoverImage={music.albumCoverImage} title={music.title} />}
 
-      <h2 className={styles.title}>{music.title}</h2>
-      <p className={styles.artist}>{music.artist} - {music.album} ({music.releaseYear})</p>
+      <h2 className={styles.title}>Titulo: {music.title}</h2>
+      <p className={styles.artist}>Artista: {music.artist} - Album:{music.album} - Ano:({music.releaseYear})</p>
 
       <MusicInfo music={music} />
 

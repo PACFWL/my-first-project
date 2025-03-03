@@ -21,6 +21,14 @@ interface Music {
   metadata?: Record<string, string>;
 }
 
+export const audioQualityMap: { [key: string]: string } = {
+  UNKNOWN: "Desconhecido",
+  LOW: "Baixa",
+  MEDIUM: "Média",
+  HIGH: "Alta",
+  LOSSLESS: "Sem Perdas (Lossless)",
+};
+
 const useMusicDetails = (id: string) => {
   const [music, setMusic] = useState<Music | null>(null);
   const [loading, setLoading] = useState(true);
@@ -35,7 +43,7 @@ const useMusicDetails = (id: string) => {
     setLoading(true);
     try {
       const data = await getMusicById(musicId);
-      console.log("Música carregada:", data); 
+      console.log("Música carregada:", data);
       setMusic(data);
     } catch (error) {
       console.error("Erro ao buscar detalhes da música:", error);

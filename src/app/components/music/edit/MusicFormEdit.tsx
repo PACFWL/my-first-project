@@ -31,7 +31,6 @@ import styles from "../../../styles/music/MusicFormEdit.module.css";
         <input name="artist" value={formData.artist} onChange={handleChange} placeholder="Artista" className={styles.input} required />
         <input name="album" value={formData.album} onChange={handleChange} placeholder="Álbum" className={styles.input} required />
         <input name="releaseYear" value={formData.releaseYear} onChange={handleChange} type="number" placeholder="Ano de Lançamento" className={styles.input} required />
-        
         <input name="releaseDate" value={formData.releaseDate} onChange={handleChange} type="date" placeholder="Data de Lançamento" className={styles.input} />
         <input name="genre" value={formData.genre} onChange={handleChange} placeholder="Gênero (separado por vírgula)" className={styles.input} />
         <input name="featuredArtists" value={formData.featuredArtists} onChange={handleChange} placeholder="Artistas em Destaque" className={styles.input} /> 
@@ -42,36 +41,32 @@ import styles from "../../../styles/music/MusicFormEdit.module.css";
         <input name="duration" value={formData.duration} onChange={handleChange} type="number" placeholder="Duração (minutos)" className={styles.input} />
         <input name="rating" value={formData.rating} onChange={handleChange} type="number" placeholder="Avaliação (0-5)" className={styles.input} />
         <input name="price" value={formData.price} onChange={handleChange} placeholder="Preço" className={styles.input} />
-        <label className={styles.select}>
-  Qualidade de Áudio:
-  <select
-    name="audioQuality"
-    value={formData.audioQuality}
-    onChange={handleChange}
-    className={styles.input}
-  >
-    <option value="">Selecione a Qualidade</option>
-    <option value="UNKNOWN">Desconhecido</option>
-    <option value="LOW">Baixa</option>
-    <option value="MEDIUM">Média</option>
-    <option value="HIGH">Alta</option>
-    <option value="LOSSLESS">Sem Perdas (Lossless)</option>
-  </select>
-</label>
-
-<textarea
-  name="lyrics"
-  value={formData.lyrics}
-  onChange={handleChange}
-  placeholder="Letra da Música"
-  className={styles.textarea}
-  rows={3}
-  onInput={(e) => {
-    e.currentTarget.style.height = "auto"; 
-    e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
-  }}
-></textarea>
-
+        <label className={styles.select}>Qualidade de Áudio:
+          <select
+            name="audioQuality"
+            value={formData.audioQuality}
+            onChange={handleChange}
+            className={styles.input}
+          >
+            <option value="">Selecione a Qualidade</option>
+            <option value="UNKNOWN">Desconhecido</option>
+            <option value="LOW">Baixa</option>
+            <option value="MEDIUM">Média</option>
+            <option value="HIGH">Alta</option>
+            <option value="LOSSLESS">Sem Perdas (Lossless)</option>
+          </select>
+        </label>
+          <textarea
+            name="lyrics"
+            value={formData.lyrics}
+            onChange={handleChange}
+            placeholder="Letra da Música"
+            className={styles.textarea}
+            rows={3}
+            onInput={(e) => {
+              e.currentTarget.style.height = "auto"; 
+              e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+            }}></textarea>
         <input name="tags" value={formData.tags} onChange={handleChange} placeholder="Tags (separadas por vírgula)" className={styles.input} />
         <strong>Metadados:</strong>
         {Object.entries(formData.metadata).map(([key, value], index) => (

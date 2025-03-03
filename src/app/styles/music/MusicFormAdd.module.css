@@ -1,7 +1,7 @@
 .container {
     padding: 24px;
-    max-width: 50rem;
-    margin: 2rem auto;
+    max-width: 900rem;
+    margin: 20px auto;
     background: linear-gradient(135deg, #1e293b, #111827);
     border-radius: 12px;
     box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.2);
@@ -17,9 +17,9 @@
   .title {
     font-size: 2rem;
     font-weight: bold;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #1f2937;
+    margin-bottom: 16px;
+    color: #f7bf09;
+    text-shadow: 2px 2px 8px rgba(247, 191, 9, 0.4);
   }
   
   .form {
@@ -30,12 +30,12 @@
   }
   
   .input, .select, .textarea, .fileInput {
-    width: 100%;
-    padding: 0.75rem;
+    padding: 10px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
     font-size: 1rem;
     background-color: white;
+    color: #1e293b;
   }
   
   .textarea {

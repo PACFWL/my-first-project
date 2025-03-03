@@ -1,7 +1,7 @@
 
 "use client";
 
-import MusicDetails from "@/app/components/details/MusicDetails";
+import MusicDetails from "@/app/components/music/details/MusicDetails";
 import { useParams } from "next/navigation";
 import styles from "../../../styles/music/MusicDetailsPage.module.css";
 

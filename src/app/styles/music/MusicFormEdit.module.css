@@ -97,3 +97,29 @@
   background: linear-gradient(135deg, #c53030, #a02020);
   transform: scale(1.05);
 }
+
+.select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #1e293b; 
+  outline: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.select option {
+  background-color: #1e293b; 
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.1);
+}
+
+

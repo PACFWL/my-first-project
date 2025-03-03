@@ -1,7 +1,7 @@
 
 "use client";
 
-import EditMusicForm from "@/app/components/edit/MusicFormEdit";
+import EditMusicForm from "@/app/components/music/edit/MusicFormEdit";
 
 export default function EditMusicPage() {
   return (

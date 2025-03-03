@@ -1,4 +1,4 @@
-import MusicList from "@/app/components/list/MusicList"; 
+import MusicList from "@/app/components/music/list/MusicList"; 
 
 export default function MusicListPage() {
   return (

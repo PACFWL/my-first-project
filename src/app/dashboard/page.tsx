@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from "../styles/dashboard/page.module.css"; 
+import Sidebar from "@/app/components/Sidebar"; 
+import styles from "../styles/dashboard/page.module.css";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -15,21 +16,12 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Dashboard</h1>
-      <p>Bem-vindo ao seu painel!</p>
-        <h1 className={styles.title}>Gerenciamento de Músicas</h1>
-      <div className={styles.buttonContainer}>
-        <button onClick={() => router.push("/music/list")} className={styles.button}>
-          Listagem de Músicas
-        </button>
-        <button onClick={() => router.push("/music/add")} className={styles.button}>
-          Adicionar Nova Música
-        </button>
-        <button onClick={() => router.push("/music/paged")} className={styles.button}>
-          Listagem de paginação
-        </button>
-      </div> 
+    <div className={styles.dashboard}>
+     <Sidebar/>
+      <main className={styles.content}>
+        <h1 className={styles.title}>Bem-vindo ao seu painel!</h1>
+        <p>Gerencie músicas, usuários, artistas e gêneros facilmente.</p>
+      </main>
     </div>
   );
 }

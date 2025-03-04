@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Sidebar from "@/app/components/Sidebar"; 
+import Sidebar from "@/app/components/dashboard/Sidebar"; 
+import Navbar from "@/app/components/dashboard/Navbar";
 import styles from "../styles/dashboard/page.module.css";
 
 export default function Dashboard() {
@@ -17,6 +18,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.dashboard}>
+        <Navbar />
      <Sidebar/>
       <main className={styles.content}>
         <h1 className={styles.title}>Bem-vindo ao seu painel!</h1>

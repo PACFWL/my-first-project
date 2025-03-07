@@ -18,7 +18,7 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       await registerUser({ name, email, password, role });
-      router.push("/users/login");
+      router.push("/profile/add");
     } catch (err) {
       setError("Erro ao registrar usuário.");
     }

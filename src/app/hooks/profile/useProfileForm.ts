@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { createProfile } from "@/app/lib/profile/profileApi";
-import { useRouter } from "next/navigation"; // Importa o router
-
+import { useRouter } from "next/navigation"; 
 const useProfileForm = () => {
-  const router = useRouter(); // Instância do router
+  const router = useRouter(); 
 
   const [formData, setFormData] = useState({
     displayName: "",
@@ -11,7 +10,7 @@ const useProfileForm = () => {
     location: "",
     website: "",
     dateOfBirth: "",
-    profilePictureUrl: "", // Agora é uma string para armazenar um link
+    profilePictureUrl: "", 
   });
 
   const [loading, setLoading] = useState(false);
@@ -32,16 +31,16 @@ const useProfileForm = () => {
         location: formData.location || null,
         website: formData.website || null,
         dateOfBirth: formData.dateOfBirth ? new Date(formData.dateOfBirth).toISOString() : null,
-        profilePictureUrl: formData.profilePictureUrl || null, // Armazena o link da imagem
+        profilePictureUrl: formData.profilePictureUrl || null, 
       };
 
       await createProfile(profileData);
       alert("Perfil criado com sucesso!");
 
-      // Redireciona para o Dashboard
+   
       router.push("/users/login"); 
 
-      // Resetando o formulário após o envio bem-sucedido
+    
       setFormData({
         displayName: "",
         bio: "",

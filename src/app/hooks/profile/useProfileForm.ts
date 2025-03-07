@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { createProfile } from "@/app/lib/profile/profileApi";
 import { useRouter } from "next/navigation"; 
@@ -5,6 +6,7 @@ const useProfileForm = () => {
   const router = useRouter(); 
 
   const [formData, setFormData] = useState({
+    userId: "", 
     displayName: "",
     bio: "",
     location: "",
@@ -26,6 +28,7 @@ const useProfileForm = () => {
 
     try {
       const profileData = {
+        userId: formData.userId,
         displayName: formData.displayName,
         bio: formData.bio || null,
         location: formData.location || null,
@@ -42,6 +45,7 @@ const useProfileForm = () => {
 
     
       setFormData({
+        userId: "",
         displayName: "",
         bio: "",
         location: "",
@@ -57,7 +61,7 @@ const useProfileForm = () => {
     }
   };
 
-  return { formData, handleChange, handleSubmit, loading };
+  return { formData, setFormData, handleChange, handleSubmit, loading };
 };
 
 export default useProfileForm;

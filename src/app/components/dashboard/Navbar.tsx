@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <div className={styles.navbar}>
       <div className={styles.profileMenu}>
-        <button onClick={() => router.push("/profile")} className={styles.navItem}>
+        <button onClick={() => router.push("/profile/details")} className={styles.navItem}>
           <FaUserCircle className={styles.icon} /> Meu Perfil
         </button>
         <button onClick={() => router.push("/settings")} className={styles.navItem}>

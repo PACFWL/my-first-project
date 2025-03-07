@@ -17,12 +17,21 @@ export default function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await registerUser({ name, email, password, role });
-      router.push("/profile/add");
+      const user = await registerUser({ name, email, password, role });
+  
+      if (user?.id) {
+        
+        sessionStorage.setItem("userId", user.id); 
+        router.push("/profile/add"); 
+      
+      } else {
+        throw new Error("ID do usuário não retornado.");
+      }
     } catch (err) {
       setError("Erro ao registrar usuário.");
     }
   };
+  
 
   return (
     <motion.div 

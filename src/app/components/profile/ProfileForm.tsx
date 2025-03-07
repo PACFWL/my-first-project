@@ -1,12 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation"; 
 import useProfileForm from "@/app/hooks/profile/useProfileForm";
 
 const ProfileForm: React.FC = () => {
-  const { formData, handleChange, handleSubmit, loading } = useProfileForm();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId"); 
+
+  const { formData, setFormData, handleChange, handleSubmit, loading } = useProfileForm();
+
+  useEffect(() => {
+    const storedUserId = sessionStorage.getItem("userId");
+    if (storedUserId) {
+      setFormData((prev) => ({ ...prev, userId: storedUserId }));
+    }
+  }, [setFormData]);
+  
 
   return (
     <form onSubmit={handleSubmit} className="profile-form">
+      <input type="hidden" name="userId" value={formData.userId} />
+
       <div>
         <label>Nome de exibição:</label>
         <input 
@@ -58,16 +72,15 @@ const ProfileForm: React.FC = () => {
       </div>
 
       <div>
-  <label>URL da Foto de Perfil:</label>
-  <input 
-    type="url" 
-    name="profilePictureUrl" 
-    value={formData.profilePictureUrl} 
-    onChange={handleChange} 
-  />
-  {formData.profilePictureUrl && <img src={formData.profilePictureUrl} alt="Preview" className="preview-image" />}
-</div>
-
+        <label>URL da Foto de Perfil:</label>
+        <input 
+          type="url" 
+          name="profilePictureUrl" 
+          value={formData.profilePictureUrl} 
+          onChange={handleChange} 
+        />
+        {formData.profilePictureUrl && <img src={formData.profilePictureUrl} alt="Preview" className="preview-image" />}
+      </div>
 
       <button type="submit" disabled={loading}>
         {loading ? "Salvando..." : "Criar Perfil"}

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import useMusicFormAdd from "@/app/hooks/useMusicFormAdd";
+import useMusicFormAdd from "@/app/hooks/music/useMusicFormAdd";
 import styles from "../../../styles/music/MusicFormAdd.module.css";
 
 const MusicFormAdd: React.FC = () => {

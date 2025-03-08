@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import useMusicDetails from "@/app/hooks/useMusicDetails";
+import useMusicDetails from "@/app/hooks/music/useMusicDetails";
 import AlbumCover from "./AlbumCover";
 import MusicInfo from "./MusicInfo";
 import { deleteMusic } from "@/app/lib/music/musicApi";

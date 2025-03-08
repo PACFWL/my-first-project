@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import useMusicList from "@/app/hooks/useMusicList";
+import useMusicList from "@/app/hooks/music/useMusicList";
 import styles from "../../../styles/music/MusicList.module.css";
 
 

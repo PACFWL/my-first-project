@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/music/MusicDetails.module.css";
 import StarRating from "@/app/components/music/details/StarRating";
-import { audioQualityMap } from "@/app/hooks/useMusicDetails"; 
+import { audioQualityMap } from "@/app/hooks/music/useMusicDetails"; 
 
 const MusicInfo: React.FC<{ music: any }> = ({ music }) => {
   return (

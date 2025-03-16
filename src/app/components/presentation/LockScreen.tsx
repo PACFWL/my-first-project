@@ -61,6 +61,7 @@ export default function LockScreen({ onUnlock }: LockScreenProps) {
         type="number"
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && checkAnswer()} 
         className={styles.input}
         placeholder="Sua resposta"
       />

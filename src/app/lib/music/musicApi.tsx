@@ -53,11 +53,6 @@ export const updateMusic = async (id: string, music: any, albumCover?: File) => 
   return fetchRequest(`${API_URL}/api/music/${id}`, { method: "PUT", body: formData });
 };
 
-export const searchMusic = async (params: Record<string, string | number | boolean>) => {
-  const query = new URLSearchParams(params as any).toString();
-  return fetchRequest(`${API_URL}/api/music/search?${query}`, { method: "GET" });
-};
-
 export const getPagedMusic = async (page: number = 0, size: number = 10) => {
   return fetchRequest(`${API_URL}/api/music/paged?page=${page}&size=${size}`, { method: "GET" });
 };
@@ -79,3 +74,19 @@ export const getMusicByAudioQuality = async (audioQuality: string) =>
 
 export const getMusicByCreationDate = async (createdAfter: string) => 
   fetchRequest(`${API_URL}/api/music/filter/by-created-after?createdAfter=${createdAfter}`, { method: "GET" });
+
+export const advancedSearchMusic = async (filters: Record<string, any>) => {
+  const queryParams = new URLSearchParams();
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      if (Array.isArray(value)) {
+        value.forEach((v) => queryParams.append(key, v.toString()));
+      } else {
+        queryParams.append(key, value.toString());
+      }
+    }
+  });
+
+  console.log("🔎 Parâmetros de busca enviados:", queryParams.toString());
+  return fetchRequest(`${API_URL}/api/music/search?${queryParams.toString()}`, { method: "GET" });
+};

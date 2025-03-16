@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation"; 
 import styles from "../../styles/dashboard/sidebar.module.css";
-import { FaMusic, FaUser, FaGuitar, FaList, FaPlus, FaBars } from "react-icons/fa";
+import { FaMusic, FaUser, FaGuitar, FaList, FaPlus, FaBars, FaSearch, FaFilter } from "react-icons/fa";
 
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(true); 
@@ -26,6 +26,12 @@ export default function Sidebar() {
           </button>
           <button onClick={() => router.push("/music/add")} className={styles.navItem}>
             <FaPlus className={styles.icon} /> {!isCollapsed && "Adicionar Música"}
+          </button>
+          <button onClick={() => router.push("/music/search")} className={styles.navItem}>
+            <FaSearch className={styles.icon} /> {!isCollapsed && "Pesquisa de Música"}
+          </button>
+          <button onClick={() => router.push("/music/filter")} className={styles.navItem}>
+            <FaFilter className={styles.icon} /> {!isCollapsed && "Filtro de Música"}
           </button>
         </div>
         <div className={styles.section}>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { advancedSearchMusic } from "@/app/lib/music/musicApi";
 
 interface SearchParams {
+  title?: string;
   artist?: string;
   album?: string;
   genres?: string[];
@@ -49,4 +50,3 @@ export function useMusicSearch(initialParams: SearchParams = {}) {
 
   return { searchParams, setSearchParams, results, loading, error };
 }
-

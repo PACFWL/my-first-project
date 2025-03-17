@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useMusicSearch } from "@/app/hooks/music/useMusicSearch";
 import styles from "../../../styles/music/MusicSearch.module.css";
 
 const MusicSearch: React.FC = () => {
+  const router = useRouter();
   const { searchParams, setSearchParams, results, loading, error } = useMusicSearch();
   const [form, setForm] = useState(searchParams);
 
@@ -27,6 +29,14 @@ const MusicSearch: React.FC = () => {
     <div className={styles.container}>
       <h2>Pesquisa Avançada</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
+      <input
+          type="text"
+          name="title"
+          placeholder="Título"
+          value={form.title || ""}
+          onChange={handleChange}
+          className={styles.inputField}
+        />
         <input
           type="text"
           name="artist"
@@ -58,7 +68,7 @@ const MusicSearch: React.FC = () => {
           onChange={handleChange}
         />
 
-        <label>
+        <label className={styles.label}>
           Conteúdo Explícito:
           <select name="isExplicit" value={form.isExplicit === undefined ? "" : String(form.isExplicit)} onChange={handleChange}>
             <option value="">Indiferente</option>
@@ -67,14 +77,15 @@ const MusicSearch: React.FC = () => {
           </select>
         </label>
 
-        <label>
-          Sem Letra:
-          <select name="noLyrics" value={form.noLyrics === undefined ? "" : String(form.noLyrics)} onChange={handleChange}>
-            <option value="">Indiferente</option>
-            <option value="true">Sim</option>
-            <option value="false">Não</option>
-          </select>
-        </label>
+        <label className={styles.label}>
+        Sem Letra:
+        <select name="noLyrics" value={form.noLyrics === undefined ? "" : String(form.noLyrics)} onChange={handleChange}>
+          <option value="">Indiferente</option>
+          <option value="true">Sim</option>
+          <option value="false">Não</option>
+        </select>
+      </label>
+
         <input
           type="text"
           name="lyricsKeywords"
@@ -84,7 +95,7 @@ const MusicSearch: React.FC = () => {
           className={styles.inputField}
         />
 
-        <label>
+        <label className={styles.label}>
           Correspondência exata:
           <select name="exactLyricsMatch" value={form.exactLyricsMatch === undefined ? "" : String(form.exactLyricsMatch)} onChange={handleChange}>
             <option value="">Indiferente</option>
@@ -104,10 +115,23 @@ const MusicSearch: React.FC = () => {
         {results.length > 0 ? (
           results.map((music, index) => (
             <div key={index} className={styles.musicCard}>
+              <div className={styles.info}>
+              <img
+                src={`data:image/jpeg;base64,${music.albumCoverImage}`}
+                alt={music.title}
+                className={styles.albumCover}
+              />
               <h3>{music.title}</h3>
               <p>Artista: {music.artist}</p>
               <p>Álbum: {music.album}</p>
               <p>Ano: {music.releaseYear}</p>
+              </div>
+              <button
+              onClick={() => router.push(`/music/details/${music.id}`)}
+              className={styles.button}
+            >
+              Visualizar Dados
+            </button>
             </div>
           ))
         ) : (
@@ -119,11 +143,3 @@ const MusicSearch: React.FC = () => {
 }
 
 export default MusicSearch;
-    /** *   <input
-  type="text"
-  name="lyricsKeywords"
-  placeholder="Palavras-chave na letra"
-  value={form.lyricsKeywords || ""}
-  onChange={handleChange}
-  className={styles.inputField}
-/>**/
